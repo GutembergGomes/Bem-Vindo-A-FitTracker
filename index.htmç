@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo ao FitTracker Pro</title>
+    <style>
+        :root {
+            --primary: #0047FF;
+            --secondary: #0B1221;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --surface: #1a1f2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, rgba(0, 71, 255, 0.15) 0%, transparent 70%);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #0047FF, #00c6ff);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 71, 255, 0.3);
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 71, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 71, 255, 0.5);
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 71, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 16px;
+            display: inline-block;
+            padding: 10px;
+            background: rgba(0, 71, 255, 0.1);
+            border-radius: 12px;
+            color: #0047FF;
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .hero { padding: 40px 20px; }
+            .features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container hero">
+        <div class="logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M20.57 14.86L22 13.43L20.57 12L17 15.57L8.43 7L12 3.43L10.57 2L9.14 3.43L7.71 2L5.57 4.14L4.14 2.71L2.71 4.14L4.14 5.57L2 7.71L3.43 9.14L2 10.57L3.43 12L7 8.43L15.57 17L12 20.57L13.43 22L14.86 20.57L16.29 22L18.43 19.86L19.86 21.29L21.29 19.86L19.86 18.43L22 16.29L20.57 14.86Z" />
+            </svg>
+        </div>
+        
+        <h1>Email Confirmado!</h1>
+        <p class="subtitle">Sua conta foi ativada com sucesso. Você já pode acessar todas as funcionalidades do FitTracker Pro.</p>
+
+        <a href="fittrackerpro://home" class="cta-button" id="openAppBtn">
+            ABRIR O APP AGORA
+        </a>
+
+        <div class="features">
+            <div class="feature-card">
+                <span class="feature-icon">💪</span>
+                <div class="feature-title">Treinos Personalizados</div>
+                <div class="feature-desc">Fichas de treino adaptadas ao seu objetivo e nível de experiência.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🍎</span>
+                <div class="feature-title">Nutrição Inteligente</div>
+                <div class="feature-desc">Controle de macros e calorias integrado com seu plano de treino.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">📈</span>
+                <div class="feature-title">Acompanhamento Real</div>
+                <div class="feature-desc">Gráficos detalhados da sua evolução corporal e de carga.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 FitTracker Pro. Todos os direitos reservados.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
+            Se o botão não abrir o app, certifique-se que ele está instalado no seu dispositivo.
+        </p>
+    </footer>
+
+    <script>
+        // Tenta abrir o app automaticamente ao carregar
+        window.onload = function() {
+            // Verifica se está em um dispositivo móvel
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                setTimeout(function() {
+                    window.location.href = "fittrackerpro://home";
+                }, 1000);
+            }
+        };
+    </script>
+</body>
+</html>
