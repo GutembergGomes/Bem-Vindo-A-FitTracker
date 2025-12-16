@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem-vindo ao FitTracker Pro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --primary: #0047FF;
             --secondary: #0B1221;
+            --accent: #00c6ff;
             --text: #ffffff;
             --text-muted: #a0a0a0;
             --surface: #1a1f2e;
+            --success: #00E676;
         }
 
         * {
@@ -27,6 +30,25 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Background Effects */
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 71, 255, 0.15) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
         }
 
         .container {
@@ -34,6 +56,7 @@
             margin: 0 auto;
             padding: 0 20px;
             width: 100%;
+            z-index: 1;
         }
 
         /* Hero Section */
@@ -44,61 +67,119 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 60px 20px;
-            background: radial-gradient(circle at center, rgba(0, 71, 255, 0.15) 0%, transparent 70%);
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .success-badge {
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--success);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 230, 118, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .logo-container {
+            position: relative;
+            margin-bottom: 30px;
+            animation: scaleIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 24px;
+            width: 100px;
+            height: 100px;
             background: linear-gradient(135deg, #0047FF, #00c6ff);
-            border-radius: 20px;
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 25px rgba(0, 71, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 71, 255, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, #0047FF, #00c6ff);
+            border-radius: 28px;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(10px);
         }
 
         .logo svg {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             fill: white;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 16px;
             background: linear-gradient(to right, #ffffff, #a0a0a0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
         p.subtitle {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
             max-width: 600px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
         }
 
         .cta-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, #0047FF, #00c6ff);
             color: white;
-            font-weight: 600;
-            padding: 16px 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 20px 50px;
             border-radius: 50px;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 71, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 71, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 71, 255, 0.5);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 71, 255, 0.4);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         /* Features Grid */
@@ -106,99 +187,163 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
-            margin-top: 60px;
+            margin-top: 80px;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
         }
 
         .feature-card {
-            background: var(--surface);
-            padding: 30px;
-            border-radius: 16px;
+            background: rgba(26, 31, 46, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            background: rgba(26, 31, 46, 0.8);
             border-color: rgba(0, 71, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .feature-icon {
-            font-size: 24px;
-            margin-bottom: 16px;
-            display: inline-block;
-            padding: 10px;
+        .feature-icon-wrapper {
+            width: 60px;
+            height: 60px;
             background: rgba(0, 71, 255, 0.1);
-            border-radius: 12px;
-            color: #0047FF;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #00c6ff;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon-wrapper {
+            background: linear-gradient(135deg, #0047FF, #00c6ff);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
         }
 
         .feature-title {
             font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+            color: white;
         }
 
         .feature-desc {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Phone Mockup (Visual Element) */
+        .mockup-container {
+            display: none; /* Hidden on mobile, shown on desktop */
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             color: var(--text-muted);
             font-size: 0.9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             margin-top: auto;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
         }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .hero { padding: 40px 20px; }
-            .features { grid-template-columns: 1fr; }
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .hero { padding: 60px 20px; }
+            .features { grid-template-columns: 1fr; margin-top: 60px; }
+            .feature-card { padding: 30px; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-glow"></div>
+
     <div class="container hero">
-        <div class="logo">
-            <svg viewBox="0 0 24 24">
-                <path d="M20.57 14.86L22 13.43L20.57 12L17 15.57L8.43 7L12 3.43L10.57 2L9.14 3.43L7.71 2L5.57 4.14L4.14 2.71L2.71 4.14L4.14 5.57L2 7.71L3.43 9.14L2 10.57L3.43 12L7 8.43L15.57 17L12 20.57L13.43 22L14.86 20.57L16.29 22L18.43 19.86L19.86 21.29L21.29 19.86L19.86 18.43L22 16.29L20.57 14.86Z" />
-            </svg>
+        <div class="success-badge">
+            <i class="fas fa-check-circle"></i> Email Confirmado
+        </div>
+
+        <div class="logo-container">
+            <div class="logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20.57 14.86L22 13.43L20.57 12L17 15.57L8.43 7L12 3.43L10.57 2L9.14 3.43L7.71 2L5.57 4.14L4.14 2.71L2.71 4.14L4.14 5.57L2 7.71L3.43 9.14L2 10.57L3.43 12L7 8.43L15.57 17L12 20.57L13.43 22L14.86 20.57L16.29 22L18.43 19.86L19.86 21.29L21.29 19.86L19.86 18.43L22 16.29L20.57 14.86Z" />
+                </svg>
+            </div>
         </div>
         
-        <h1>Email Confirmado!</h1>
-        <p class="subtitle">Sua conta foi ativada com sucesso. Você já pode acessar todas as funcionalidades do FitTracker Pro.</p>
+        <h1>Pronto para Treinar!</h1>
+        <p class="subtitle">Sua conta está ativa e segura. O FitTracker Pro já está configurado para levar seus treinos para o próximo nível.</p>
 
         <a href="fittrackerpro://home" class="cta-button" id="openAppBtn">
-            ABRIR O APP AGORA
+            <i class="fas fa-play" style="margin-right: 12px; font-size: 0.9em;"></i>
+            ABRIR APLICATIVO
         </a>
 
         <div class="features">
             <div class="feature-card">
-                <span class="feature-icon">💪</span>
-                <div class="feature-title">Treinos Personalizados</div>
-                <div class="feature-desc">Fichas de treino adaptadas ao seu objetivo e nível de experiência.</div>
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <div class="feature-title">Treinos IA</div>
+                <div class="feature-desc">Fichas de treino inteligentes que se adaptam à sua evolução e objetivos pessoais.</div>
             </div>
             <div class="feature-card">
-                <span class="feature-icon">🍎</span>
-                <div class="feature-title">Nutrição Inteligente</div>
-                <div class="feature-desc">Controle de macros e calorias integrado com seu plano de treino.</div>
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-apple-alt"></i>
+                </div>
+                <div class="feature-title">Nutrição</div>
+                <div class="feature-desc">Planos alimentares e controle de macros integrados com sua rotina de exercícios.</div>
             </div>
             <div class="feature-card">
-                <span class="feature-icon">📈</span>
-                <div class="feature-title">Acompanhamento Real</div>
-                <div class="feature-desc">Gráficos detalhados da sua evolução corporal e de carga.</div>
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="feature-title">Evolução</div>
+                <div class="feature-desc">Acompanhe seu progresso com gráficos detalhados e relatórios de performance.</div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 FitTracker Pro. Todos os direitos reservados.</p>
-        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
-            Se o botão não abrir o app, certifique-se que ele está instalado no seu dispositivo.
+        <p>&copy; 2025 FitTracker Pro. Transformando vidas através do fitness.</p>
+        <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.6;">
+            Se o botão não funcionar, certifique-se que o aplicativo está instalado.<br>
+            <a href="#" style="color: var(--accent); text-decoration: none; margin-top: 5px; display: inline-block;">Precisa de ajuda?</a>
         </p>
     </footer>
 
@@ -206,11 +351,25 @@
         // Tenta abrir o app automaticamente ao carregar
         window.onload = function() {
             // Verifica se está em um dispositivo móvel
-            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            
+            if (isMobile) {
                 setTimeout(function() {
                     window.location.href = "fittrackerpro://home";
-                }, 1000);
+                }, 1500); // Delay maior para usuário ver a confirmação
             }
+
+            // Efeito de hover no card
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
         };
     </script>
 </body>
